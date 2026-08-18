@@ -48,6 +48,71 @@
             #endregion
 
             #endregion
+
+            #region Part 02 — Practical
+
+            DeliveryCenter center = new DeliveryCenter();
+
+            StandardShipment standard = new StandardShipment("SH001", "Laptop", 3, 80, new DeliveryAddress("Cairo", "Tahrir", 10));
+
+            ExpressShipment express = new ExpressShipment("SH002","Phone",2,60,new DeliveryAddress("Cairo", "Nasr St", 1),30);
+
+            InternationalShipment international = new InternationalShipment("SH003", "Television", 8, 120, new DeliveryAddress("Cairo", "Nile St", 18), "Germany", 100);
+
+            center.AddShipment(standard);
+            center.AddShipment(express);
+            center.AddShipment(international);
+
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Delivery Center");
+            Console.WriteLine("==========================================");
+
+            center.PrintAllShipments();
+
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Tracking Status");
+            Console.WriteLine("==========================================");
+
+            center.PrintTrackingStatuses();
+
+
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Insurance");
+            Console.WriteLine("==========================================");
+
+            DeliveryReport D1= new DeliveryReport();
+            D1.PrintInsurance(standard);
+            D1.PrintInsurance(express);
+            D1.PrintInsurance(international);
+
+
+            Console.WriteLine("===============================");
+
+            ITrackable[] trackableShipments ={standard,express,international};
+
+            foreach (ITrackable shipment in trackableShipments)
+            {
+                Console.WriteLine(shipment.GetTrackingStatus());
+            }
+
+            Console.WriteLine("=================================");
+
+            IInsurable[] insurableShipments ={standard,express,international};
+
+
+            foreach (IInsurable shipment in insurableShipments)
+            {
+                Console.WriteLine(
+                    $"Insurance : {shipment.CalculateInsurance()} EGP"
+                );
+            }
+
+
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Interface Polymorphism Demonstrated Successfully.");
+
+
+            #endregion
         }
     }
 }
